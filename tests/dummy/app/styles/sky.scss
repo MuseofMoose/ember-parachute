@@ -13,7 +13,7 @@ $shadows-small: multiple-box-shadow(350);
 $shadows-medium: multiple-box-shadow(100);
 $shadows-big: multiple-box-shadow(50);
 
-$stars-speed: 120s;
+$stars-speed: 240s;
 
 #stars {
   width: 1px;
@@ -21,6 +21,11 @@ $stars-speed: 120s;
   background: transparent;
   box-shadow: $shadows-small;
   animation: animStar $stars-speed linear infinite;
+
+  &.fast {
+    animation: accelStar $stars-speed/12 linear,
+      animStar $stars-speed/20 $stars-speed/12 linear infinite;
+  }
 
   &:after {
     content: " ";
@@ -40,6 +45,11 @@ $stars-speed: 120s;
   box-shadow: $shadows-medium;
   animation: animStar $stars-speed/2 linear infinite;
 
+  &.fast {
+    animation: accelStar $stars-speed/24 linear,
+      animStar $stars-speed/40 $stars-speed/24 linear infinite;
+  }
+
   &:after {
     content: " ";
     position: absolute;
@@ -56,7 +66,12 @@ $stars-speed: 120s;
   height: 3px;
   background: transparent;
   box-shadow: $shadows-big;
-  animation: animStar $stars-speed/4 linear infinite;
+  animation: animStar $stars-speed animStar $stars-speed/4 linear infinite;
+
+  &.fast {
+    animation: accelStar $stars-speed/48 linear,
+      animStar $stars-speed/80 $stars-speed/48 linear infinite;
+  }
 
   &:after {
     content: " ";
@@ -75,6 +90,20 @@ $stars-speed: 120s;
   }
 
   to {
-    transform: translateY(-2000px);
+    transform: translateY(-4000px);
   }
+}
+
+@keyframes accelStar {
+  0% { transform: translateY(0); }
+  10% { transform: translateY(-100px); }
+  20% { transform: translateY(-285px); }
+  30% { transform: translateY(-535px); }
+  40% { transform: translateY(-850px); }
+  50% { transform: translateY(-1230px); }
+  60% { transform: translateY(-1675px); }
+  70% { transform: translateY(-2185px); }
+  80% { transform: translateY(-2760px); }
+  90% { transform: translateY(-3335px); }
+  100% { transform: translateY(-4000px); }
 }
